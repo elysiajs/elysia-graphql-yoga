@@ -3,7 +3,7 @@ A plugin for [kingworld](https://github.com/saltyaom/kingworld) that add support
 
 ## Installation
 ```bash
-bun add graphql graphql-yoga @kingworldjs/graphql-yoga
+bun add graphql graphql-yoga@three @kingworldjs/graphql-yoga
 ```
 
 ## Example
