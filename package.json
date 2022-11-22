@@ -1,6 +1,6 @@
 {
   "name": "@kingworldjs/graphql-yoga",
-  "version": "0.0.0-experimental.0",
+  "version": "0.0.0-experimental.1",
   "description": "A plugin for kingworld for using graphql-yoga",
   "author": {
     "name": "saltyAom",
@@ -32,7 +32,7 @@
     "release": "npm run build && npm run test && npm publish --access public"
   },
   "peerDependencies": {
-    "kingworld": ">= 0.0.0-experimental.39",
+    "kingworld": ">= 0.0.0-experimental.51",
     "graphql-yoga": "three"
   },
   "devDependencies": {
@@ -45,7 +45,7 @@
     "eslint": "^8.26.0",
     "graphql": "^16.0.0",
     "graphql-yoga": "three",
-    "kingworld": "^0.0.0-experimental.39",
+    "kingworld": "^0.0.0-experimental.51",
     "nodemon": "^2.0.20",
     "typescript": "^4.8.4"
   }

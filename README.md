@@ -8,20 +8,21 @@ bun add graphql graphql-yoga@three @kingworldjs/graphql-yoga
 
 ## Example
 ```typescript
-import KingWorld from 'kingworld'
-import yoga from '@kingworldjs/graphql-yoga'
+import { KingWorld } from 'kingworld'
+import { yoga } from '@kingworldjs/graphql-yoga'
 
 import { createYoga, createSchema } from 'graphql-yoga'
 
 const app = new KingWorld()
-    .use(yoga, {
-        path: "/graphql",
-        yoga: createYoga({
-            schema: createSchema({
-                typeDefs: /* GraphQL */ `
-                    type Query {
-                        hi: String
-                    }
+    .use(
+        yoga({
+            path: "/graphql",
+            yoga: createYoga({
+                schema: createSchema({
+                    typeDefs: `
+                        type Query {
+                            hi: String
+                        }
                 `,
                 resolvers: {
                     Query: {
@@ -30,7 +31,7 @@ const app = new KingWorld()
                 }
             })
         })
-    })
+    )
     .listen(8080)
 ```
 ### path

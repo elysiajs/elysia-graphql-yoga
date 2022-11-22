@@ -7,22 +7,24 @@ import yoga from '../src'
 
 const req = (path: string) => new Request(path)
 
-const app = new KingWorld().use(yoga, {
-    yoga: createYoga({
-        schema: createSchema({
-            typeDefs: /* GraphQL */ `
-                type Query {
-                    hi: String
+const app = new KingWorld().use(
+    yoga({
+        yoga: createYoga({
+            schema: createSchema({
+                typeDefs: /* GraphQL */ `
+                    type Query {
+                        hi: String
+                    }
+                `,
+                resolvers: {
+                    Query: {
+                        hi: () => 'Hi from KingWorld'
+                    }
                 }
-            `,
-            resolvers: {
-                Query: {
-                    hi: () => 'Hi from KingWorld'
-                }
-            }
+            })
         })
     })
-})
+)
 
 describe('GraphQL Yoga', () => {
     it('handle GraphQL playground ', async () => {
@@ -40,7 +42,7 @@ describe('GraphQL Yoga', () => {
 
         const res = await app.handle(
             new Request('/graphql', {
-                method: "POST",
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'Content-Length': body.length.toString()

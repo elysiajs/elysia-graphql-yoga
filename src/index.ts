@@ -13,29 +13,29 @@ import { type YogaServerInstance } from 'graphql-yoga'
  * import { createYoga, createSchema } from 'graphql-yoga'
  *
  * const app = new KingWorld()
- *     .use(yoga, {
- *         path: "/graphql",
- *         yoga: createYoga({
- *             schema: createSchema({
- *                 typeDefs: `
- *                     type Query {
- *                         hi: String
+ *     .use(
+ *         yoga({
+ *             path: "/graphql",
+ *             yoga: createYoga({
+ *                 schema: createSchema({
+ *                     typeDefs: `
+ *                         type Query {
+ *                             hi: String
+ *                         }
+ *                 `,
+ *                 resolvers: {
+ *                     Query: {
+ *                         hi: () => 'Hi from KingWorld'
  *                     }
- *             `,
- *             resolvers: {
- *                 Query: {
- *                     hi: () => 'Hi from KingWorld'
  *                 }
- *             }
+ *             })
  *         })
- *     })
- * })
- * .listen(8080)
+ *     )
+ *     .listen(8080)
  * ```
  */
-const yoga = (
-    app: KingWorld,
-    {
+export const yoga =
+    ({
         /**
          * @default /graphql
          *
@@ -76,23 +76,23 @@ const yoga = (
     }: {
         path?: string
         yoga: YogaServerInstance<any, any>
-    }
-) =>
-    app
-        .onParse((request, contentType) => {
-            if (
-                getPath(request.url) === '/graphql' &&
-                contentType === 'application/json'
-            )
-                return request.text()
-        })
-        .get(path, (context) => yoga.fetch(context.request))
-        .post(path, (context) =>
-            yoga.fetch(context.request.url, {
-                method: 'POST',
-                headers: context.request.headers,
-                body: context.body
+    }) =>
+    (app: KingWorld) =>
+        app
+            .onParse((request, contentType) => {
+                if (
+                    getPath(request.url) === '/graphql' &&
+                    contentType === 'application/json'
+                )
+                    return request.text()
             })
-        )
+            .get(path, (context) => yoga.fetch(context.request))
+            .post(path, (context) =>
+                yoga.fetch(context.request.url, {
+                    method: 'POST',
+                    headers: context.request.headers,
+                    body: context.body
+                })
+            )
 
 export default yoga
