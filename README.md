@@ -13,7 +13,7 @@ import { yoga } from '@elysiajs/graphql-yoga'
 
 import { createYoga, createSchema } from 'graphql-yoga'
 
-const app = new KingWorld()
+const app = new Elysia()
     .use(
         yoga({
             yoga: createYoga({
@@ -25,7 +25,7 @@ const app = new KingWorld()
                 `,
                 resolvers: {
                     Query: {
-                        hi: () => 'Hi from KingWorld'
+                        hi: () => 'Hi from Elysia'
                     }
                 }
             })
