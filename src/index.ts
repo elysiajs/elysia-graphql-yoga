@@ -1,18 +1,18 @@
-import { KingWorld, getPath } from 'kingworld'
+import { Elysia, getPath } from 'elysia'
 
 import { type YogaServerInstance } from 'graphql-yoga'
 
 /**
- * GraphQL Yoga supports for KingWorld
+ * GraphQL Yoga supports for Elysia
  *
  * @example
  * ```typescript
- * import KingWorld from 'kingworld'
- * import yoga from '@kingworldjs/graphql-yoga'
+ * import { Elysia } from 'elysia'
+ * import { yoga } from '@elysiajs/graphql-yoga'
  *
  * import { createYoga, createSchema } from 'graphql-yoga'
  *
- * const app = new KingWorld()
+ * const app = new Elysia()
  *     .use(
  *         yoga({
  *             path: "/graphql",
@@ -25,7 +25,7 @@ import { type YogaServerInstance } from 'graphql-yoga'
  *                 `,
  *                 resolvers: {
  *                     Query: {
- *                         hi: () => 'Hi from KingWorld'
+ *                         hi: () => 'Hi from Elysia'
  *                     }
  *                 }
  *             })
@@ -47,41 +47,42 @@ export const yoga =
          *
          * @example
          * ```typescript
-         * import KingWorld from 'kingworld'
-         * import yoga from '@kingworldjs/graphql-yoga'
+         * import { Elysia } from 'elysia'
+         * import { yoga } from '@elysiajs/graphql-yoga'
          *
          * import { createYoga, createSchema } from 'graphql-yoga'
          *
-         * const app = new KingWorld()
-         *     .use(yoga, {
-         *         path: "/graphql",
-         *         yoga: createYoga({
-         *             schema: createSchema({
-         *                 typeDefs: `
-         *                     type Query {
-         *                         hi: String
+         * const app = new Elysia()
+         *     .use(
+         *         yoga({
+         *             path: "/graphql",
+         *             yoga: createYoga({
+         *                 schema: createSchema({
+         *                     typeDefs: `
+         *                         type Query {
+         *                             hi: String
+         *                         }
+         *                 `,
+         *                 resolvers: {
+         *                     Query: {
+         *                         hi: () => 'Hi from Elysia'
          *                     }
-         *             `,
-         *             resolvers: {
-         *                 Query: {
-         *                     hi: () => 'Hi from KingWorld'
          *                 }
-         *             }
+         *             })
          *         })
-         *     })
-         * })
-         * .listen(8080)
+         *     )
+         *     .listen(8080)
          */
         yoga
     }: {
         path?: string
         yoga: YogaServerInstance<any, any>
     }) =>
-    (app: KingWorld) =>
+    (app: Elysia) =>
         app
             .onParse((request, contentType) => {
                 if (
-                    getPath(request.url) === '/graphql' &&
+                    path === getPath(request.url) &&
                     contentType === 'application/json'
                 )
                     return request.text()

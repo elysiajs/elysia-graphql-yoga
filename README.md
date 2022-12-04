@@ -1,22 +1,21 @@
-# @kingworldjs/graphql-yoga
-A plugin for [kingworld](https://github.com/saltyaom/kingworld) that add support for returning html.
+# @elysiajs/graphql-yoga
+A plugin for [Elysia](https://github.com/elysiajs/elysia) for using graphql-yoga.
 
 ## Installation
 ```bash
-bun add graphql graphql-yoga@three @kingworldjs/graphql-yoga
+bun add graphql graphql-yoga@three @elysiajs/graphql-yoga
 ```
 
 ## Example
 ```typescript
-import { KingWorld } from 'kingworld'
-import { yoga } from '@kingworldjs/graphql-yoga'
+import { Elysia } from 'elysia'
+import { yoga } from '@elysiajs/graphql-yoga'
 
 import { createYoga, createSchema } from 'graphql-yoga'
 
 const app = new KingWorld()
     .use(
         yoga({
-            path: "/graphql",
             yoga: createYoga({
                 schema: createSchema({
                     typeDefs: `

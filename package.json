@@ -1,7 +1,7 @@
 {
-  "name": "@kingworldjs/graphql-yoga",
+  "name": "@elysiajs/graphql-yoga",
   "version": "0.0.0-experimental.1",
-  "description": "A plugin for kingworld for using graphql-yoga",
+  "description": "A plugin for Elysia for using graphql-yoga",
   "author": {
     "name": "saltyAom",
     "url": "https://github.com/SaltyAom",
@@ -13,15 +13,15 @@
   "types": "src/index.ts",
   "typings": "src/index.ts",
   "keywords": [
-    "kingworld",
+    "elysia",
     "graphql-yoga"
   ],
-  "homepage": "https://github.com/saltyaom/kingworld-graphql-yoga",
+  "homepage": "https://github.com/elysiajs/elysia-graphql-yoga",
   "repository": {
     "type": "git",
-    "url": "https://github.com/saltyaom/kingworld-graphql-yoga"
+    "url": "https://github.com/elysiajs/elysia-graphql-yoga"
   },
-  "bugs": "https://github.com/SaltyAom/kingworld-graphql-yoga/issues",
+  "bugs": "https://github.com/elysiajs/elysia-graphql-yoga/issues",
   "license": "MIT",
   "scripts": {
     "dev": "nodemon --config nodemon.json",
@@ -32,7 +32,7 @@
     "release": "npm run build && npm run test && npm publish --access public"
   },
   "peerDependencies": {
-    "kingworld": ">= 0.0.0-experimental.51",
+    "elysiajs": ">= 0.0.0-experimental.56",
     "graphql-yoga": "three"
   },
   "devDependencies": {
@@ -45,7 +45,7 @@
     "eslint": "^8.26.0",
     "graphql": "^16.0.0",
     "graphql-yoga": "three",
-    "kingworld": "^0.0.0-experimental.51",
+    "elysia": "^0.0.0-experimental.56",
     "nodemon": "^2.0.20",
     "typescript": "^4.8.4"
   }

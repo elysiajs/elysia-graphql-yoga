@@ -1,13 +1,13 @@
-import KingWorld from 'kingworld'
+import { Elysia } from 'elysia'
 
 import { describe, expect, it } from 'bun:test'
 
 import { createSchema, createYoga } from 'graphql-yoga'
-import yoga from '../src'
+import { yoga } from '../src'
 
 const req = (path: string) => new Request(path)
 
-const app = new KingWorld().use(
+const app = new Elysia().use(
     yoga({
         yoga: createYoga({
             schema: createSchema({
@@ -18,7 +18,7 @@ const app = new KingWorld().use(
                 `,
                 resolvers: {
                     Query: {
-                        hi: () => 'Hi from KingWorld'
+                        hi: () => 'Hi from Elysia'
                     }
                 }
             })
@@ -31,7 +31,7 @@ describe('GraphQL Yoga', () => {
         const res = await app.handle(req('/graphql?query=%7B%0A++hi%0A%7D'))
         const text = await res.text()
 
-        expect(text).toBe(JSON.stringify({ data: { hi: 'Hi from KingWorld' } }))
+        expect(text).toBe(JSON.stringify({ data: { hi: 'Hi from Elysia' } }))
         expect(res.headers.get('Content-Type')).toBe(
             'application/graphql-response+json; charset=utf-8'
         )
@@ -51,9 +51,9 @@ describe('GraphQL Yoga', () => {
             })
         )
         const text = await res.text()
-        expect(text).toBe(JSON.stringify({ data: { hi: 'Hi from KingWorld' } }))
+        expect(text).toBe(JSON.stringify({ data: { hi: 'Hi from Elysia' } }))
 
-        expect(text).toBe(JSON.stringify({ data: { hi: 'Hi from KingWorld' } }))
+        expect(text).toBe(JSON.stringify({ data: { hi: 'Hi from Elysia' } }))
         expect(res.headers.get('Content-Type')).toBe(
             'application/graphql-response+json; charset=utf-8'
         )
