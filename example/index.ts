@@ -16,7 +16,7 @@ new Elysia()
                     `,
                     resolvers: {
                         Query: {
-                            hi: () => 'Hi from KingWorld'
+                            hi: () => 'Hi from Elysia'
                         }
                     }
                 })
