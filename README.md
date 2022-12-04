@@ -1,5 +1,5 @@
 # @elysiajs/graphql-yoga
-A plugin for [Elysia](https://github.com/elysiajs/elysia) for using graphql-yoga.
+Plugin for [Elysia](https://github.com/elysiajs/elysia) for using graphql-yoga.
 
 ## Installation
 ```bash
