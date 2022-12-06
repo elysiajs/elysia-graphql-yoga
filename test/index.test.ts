@@ -33,7 +33,7 @@ describe('GraphQL Yoga', () => {
 
         expect(text).toBe(JSON.stringify({ data: { hi: 'Hi from Elysia' } }))
         expect(res.headers.get('Content-Type')).toBe(
-            'application/graphql-response+json; charset=utf-8'
+            'application/json; charset=utf-8'
         )
     })
 
@@ -55,7 +55,7 @@ describe('GraphQL Yoga', () => {
 
         expect(text).toBe(JSON.stringify({ data: { hi: 'Hi from Elysia' } }))
         expect(res.headers.get('Content-Type')).toBe(
-            'application/graphql-response+json; charset=utf-8'
+            'application/json; charset=utf-8'
         )
     })
 })
