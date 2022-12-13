@@ -1,4 +1,4 @@
-import { Elysia, getPath } from 'elysia'
+import { type Elysia, getPath } from 'elysia'
 
 import { type YogaServerInstance } from 'graphql-yoga'
 
