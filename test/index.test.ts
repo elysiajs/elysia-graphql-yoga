@@ -5,7 +5,7 @@ import { describe, expect, it } from 'bun:test'
 import { createSchema, createYoga } from 'graphql-yoga'
 import { yoga } from '../src'
 
-const req = (path: string) => new Request(path)
+const req = (path: string) => new Request(`http://localhost${path}`)
 
 const app = new Elysia().use(
     yoga({

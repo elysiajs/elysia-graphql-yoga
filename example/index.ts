@@ -1,13 +1,15 @@
-import { Elysia } from 'elysia'
+import { Elysia, SCHEMA } from 'elysia'
 
 import { createYoga, createSchema } from 'graphql-yoga'
+import { useGraphQlJit } from '@envelop/graphql-jit'
 
-import yoga from '../src/index'
+import { yoga } from '../src/index'
 
-new Elysia()
+const app = new Elysia()
     .use(
         yoga({
             yoga: createYoga({
+                // plugins: [useGraphQlJit()],
                 schema: createSchema({
                     typeDefs: /* GraphQL */ `
                         type Query {

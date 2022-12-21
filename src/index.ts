@@ -35,13 +35,13 @@ import { type YogaServerInstance } from 'graphql-yoga'
  * ```
  */
 export const yoga =
-    ({
+    <Prefix extends string = '/graphql'>({
         /**
          * @default /graphql
          *
          * path for GraphQL handler
          */
-        path = '/graphql',
+        path = '/graphql' as Prefix,
         /**
          * GraphQL Yoga instance
          *
@@ -75,7 +75,7 @@ export const yoga =
          */
         yoga
     }: {
-        path?: string
+        path?: Prefix
         yoga: YogaServerInstance<any, any>
     }) =>
     (app: Elysia) =>
