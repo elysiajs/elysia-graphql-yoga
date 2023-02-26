@@ -41,7 +41,7 @@ describe('GraphQL Yoga', () => {
         const body = JSON.stringify({ extensions: {}, query: '{\n  hi\n}' })
 
         const res = await app.handle(
-            new Request('/graphql', {
+            new Request('http://localhost/graphql', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

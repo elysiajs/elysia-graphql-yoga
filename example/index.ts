@@ -12,13 +12,26 @@ const app = new Elysia()
                 // plugins: [useGraphQlJit()],
                 schema: createSchema({
                     typeDefs: /* GraphQL */ `
+                        # This "Book" type defines the queryable fields for every book in our data source.
+                        type Book {
+                            title: String
+                            author: String
+                        }
+
                         type Query {
                             hi: String
+                            books: [Book]
                         }
                     `,
                     resolvers: {
                         Query: {
-                            hi: () => 'Hi from Elysia'
+                            hi: () => 'Hi from Elysia',
+                            books: () => [
+                                {
+                                    title: 'Elysia',
+                                    author: 'saltyAom'
+                                }
+                            ]
                         }
                     }
                 })

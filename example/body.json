@@ -1,1 +1,1 @@
-{ "query": "{\n  hi\n}", "extensions": {} }
+{ "query": "query { books { title } }" }

@@ -1,4 +1,4 @@
-import { type Elysia, getPath } from 'elysia'
+import { type Elysia, mapPathnameAndQueryRegEx } from 'elysia'
 
 import { type YogaServerInstance } from 'graphql-yoga'
 
@@ -78,22 +78,23 @@ export const yoga =
         path?: Prefix
         yoga: YogaServerInstance<any, any>
     }) =>
-    (app: Elysia) =>
-        app
-            .onParse((request, contentType) => {
-                if (
-                    path === getPath(request.url) &&
-                    contentType === 'application/json'
-                )
-                    return request.text()
-            })
-            .get(path, (context) => yoga.fetch(context.request))
-            .post(path, (context) =>
-                yoga.fetch(context.request.url, {
-                    method: 'POST',
-                    headers: context.request.headers,
-                    body: context.body
-                })
+    (app: Elysia) => {
+        // TODO: Migrate to chain method when Elysia 0.3 released
+        app.get(path, (context) => yoga.fetch(context.request))
+
+        return app.onParse(({ request }, contentType) => {
+            if (
+                path === request.url.match(mapPathnameAndQueryRegEx)?.[1] &&
+                contentType === 'application/json'
             )
+                return request.text()
+        }).post(path, (context) =>
+            yoga.fetch(context.request.url, {
+                method: 'POST',
+                headers: context.request.headers,
+                body: context.body
+            })
+        )
+    }
 
 export default yoga

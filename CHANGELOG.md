@@ -1,3 +1,7 @@
+# 0.2.0 - 26 Feb 2023
+Improvement:
+- Add support for Elysia >= 0.2.1
+
 # 0.1.0-rc.3 - 13 Dec 2022
 Improvement:
 - Add support for Elysia 0.1.0-rc.5
