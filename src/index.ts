@@ -1,4 +1,4 @@
-import { type Elysia, mapPathnameAndQueryRegEx } from 'elysia'
+import { t, type Elysia } from 'elysia'
 
 import { type YogaServerInstance } from 'graphql-yoga'
 
@@ -80,20 +80,18 @@ export const yoga =
     }) =>
     (app: Elysia) => {
         return app
-            .onParse(({ request }, contentType) => {
-                if (
-                    path === request.url.match(mapPathnameAndQueryRegEx)?.[1] &&
-                    contentType === 'application/json'
-                )
-                    return request.text()
-            })
             .get(path, async (context) => yoga.fetch(context.request))
-            .post(path, async (context) =>
-                yoga.fetch(context.request.url, {
-                    method: 'POST',
-                    headers: context.request.headers,
-                    body: context.body
-                })
+            .post(
+                path,
+                async ({ body, headers, request: { url } }) =>
+                    yoga.fetch(url, {
+                        method: 'POST',
+                        headers,
+                        body
+                    }),
+                {
+                    type: 'text'
+                }
             )
     }
 

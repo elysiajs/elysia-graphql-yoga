@@ -1,6 +1,6 @@
 {
   "name": "@elysiajs/graphql-yoga",
-  "version": "0.4.0",
+  "version": "0.5.0-rc.0",
   "description": "Plugin for Elysia for using graphql-yoga",
   "author": {
     "name": "saltyAom",
@@ -29,24 +29,24 @@
   "scripts": {
     "dev": "bun run --hot example/index.ts",
     "test": "bun wiptest",
-    "build": "rimraf dist && tsc --project tsconfig.esm.json",
+    "build": "rimraf dist && tsc --project tsconfig.esm.json && tsc --project tsconfig.cjs.json",
     "release": "npm run build && npm run test && npm publish --access public"
   },
   "peerDependencies": {
-    "elysia": ">= 0.2.0",
+    "elysia": ">= 0.5.0-beta.3",
     "graphql-yoga": ">= 3.0.0"
   },
   "devDependencies": {
-    "@envelop/core": "^3.0.4",
-    "@envelop/graphql-jit": "^5.0.3",
-    "@envelop/parser-cache": "^5.0.3",
-    "@types/node": "^18.11.7",
+    "@envelop/core": "^3.0.6",
+    "@envelop/graphql-jit": "^5.0.6",
+    "@envelop/parser-cache": "^5.0.6",
+    "@types/node": "^20.1.4",
     "bun-types": "^0.5.8",
-    "elysia": "^0.4.0",
-    "eslint": "^8.26.0",
-    "graphql": "^16.0.0",
-    "graphql-yoga": "^3.1.1",
-    "rimraf": "^3.0.2",
-    "typescript": "^4.9.4"
+    "elysia": "0.5.0-beta.3",
+    "eslint": "^8.40.0",
+    "graphql": "^16.6.0",
+    "graphql-yoga": "^3.9.1",
+    "rimraf": "4.3",
+    "typescript": "^5.0.4"
   }
 }
