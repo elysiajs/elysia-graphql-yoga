@@ -1,6 +1,20 @@
 import { t, type Elysia } from 'elysia'
 
-import { type YogaServerInstance } from 'graphql-yoga'
+import { createYoga, createSchema, type YogaServerOptions } from 'graphql-yoga'
+import type { IExecutableSchemaDefinition } from '@graphql-tools/schema'
+
+interface ElysiaYogaConfig<
+    ServerContext extends Record<string, any> = {},
+    UserContext extends Record<string, any> = {}
+> extends Omit<YogaServerOptions<ServerContext, UserContext>, 'schema'>,
+        IExecutableSchemaDefinition<UserContext> {
+    /**
+     * @default /graphql
+     *
+     * path for GraphQL handler
+     */
+    path?: string
+}
 
 /**
  * GraphQL Yoga supports for Elysia
@@ -10,25 +24,19 @@ import { type YogaServerInstance } from 'graphql-yoga'
  * import { Elysia } from 'elysia'
  * import { yoga } from '@elysiajs/graphql-yoga'
  *
- * import { createYoga, createSchema } from 'graphql-yoga'
- *
  * const app = new Elysia()
  *     .use(
  *         yoga({
- *             path: "/graphql",
- *             yoga: createYoga({
- *                 schema: createSchema({
- *                     typeDefs: `
- *                         type Query {
- *                             hi: String
- *                         }
- *                 `,
- *                 resolvers: {
- *                     Query: {
- *                         hi: () => 'Hi from Elysia'
- *                     }
+ *             typeDefs: `
+ *                 type Query {
+ *                     hi: String
  *                 }
- *             })
+ *             `,
+ *             resolvers: {
+ *                 Query: {
+ *                     hi: () => 'Hi from Elysia'
+ *                 }
+ *             }
  *         })
  *     )
  *     .listen(8080)
@@ -36,63 +44,33 @@ import { type YogaServerInstance } from 'graphql-yoga'
  */
 export const yoga =
     <Prefix extends string = '/graphql'>({
-        /**
-         * @default /graphql
-         *
-         * path for GraphQL handler
-         */
         path = '/graphql' as Prefix,
-        /**
-         * GraphQL Yoga instance
-         *
-         * @example
-         * ```typescript
-         * import { Elysia } from 'elysia'
-         * import { yoga } from '@elysiajs/graphql-yoga'
-         *
-         * import { createYoga, createSchema } from 'graphql-yoga'
-         *
-         * const app = new Elysia()
-         *     .use(
-         *         yoga({
-         *             path: "/graphql",
-         *             yoga: createYoga({
-         *                 schema: createSchema({
-         *                     typeDefs: `
-         *                         type Query {
-         *                             hi: String
-         *                         }
-         *                 `,
-         *                 resolvers: {
-         *                     Query: {
-         *                         hi: () => 'Hi from Elysia'
-         *                     }
-         *                 }
-         *             })
-         *         })
-         *     )
-         *     .listen(8080)
-         */
-        yoga
-    }: {
-        path?: Prefix
-        yoga: YogaServerInstance<any, any>
-    }) =>
+        typeDefs,
+        resolvers,
+        resolverValidationOptions,
+        inheritResolversFromInterfaces,
+        updateResolversInPlace,
+        schemaExtensions,
+        ...config
+    }: ElysiaYogaConfig) =>
     (app: Elysia) => {
+        const yoga = createYoga({
+            ...config,
+            schema: createSchema({
+                typeDefs,
+                resolvers,
+                resolverValidationOptions,
+                inheritResolversFromInterfaces,
+                updateResolversInPlace,
+                schemaExtensions
+            })
+        })
+
         return app
-            .get(path, async (context) => yoga.fetch(context.request))
-            .post(
-                path,
-                async ({ body, headers, request: { url } }) =>
-                    yoga.fetch(url, {
-                        method: 'POST',
-                        headers,
-                        body
-                    }),
-                {
-                    type: 'text'
-                }
-            )
+            .get(path, async ({ request }) => yoga.fetch(request))
+            .post(path, async ({ request }) => yoga.fetch(request), {
+                type: 'none'
+            })
     }
 
 export default yoga

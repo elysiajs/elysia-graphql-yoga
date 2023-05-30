@@ -2,27 +2,22 @@ import { Elysia } from 'elysia'
 
 import { describe, expect, it } from 'bun:test'
 
-import { createSchema, createYoga } from 'graphql-yoga'
 import { yoga } from '../src'
 
 const req = (path: string) => new Request(`http://localhost${path}`)
 
 const app = new Elysia().use(
     yoga({
-        yoga: createYoga({
-            schema: createSchema({
-                typeDefs: /* GraphQL */ `
-                    type Query {
-                        hi: String
-                    }
-                `,
-                resolvers: {
-                    Query: {
-                        hi: () => 'Hi from Elysia'
-                    }
-                }
-            })
-        })
+        typeDefs: /* GraphQL */ `
+            type Query {
+                hi: String
+            }
+        `,
+        resolvers: {
+            Query: {
+                hi: () => 'Hi from Elysia'
+            }
+        }
     })
 )
 

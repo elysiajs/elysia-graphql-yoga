@@ -1,3 +1,13 @@
+# 0.5.2 - 30 May 2023
+- Update plugin JSDoc
+
+# 0.5.1 - 30 May 2023
+Breaking Change:
+- Simplify config option, see the docs
+
+Improvement:
+- Set minimum requirement to Elysia 0.5.9
+
 # 0.5.0 - 15 May 2023
 - Add support for Elysia 0.5
 - Add CommonJS support
