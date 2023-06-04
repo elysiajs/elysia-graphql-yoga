@@ -1,6 +1,6 @@
 {
   "name": "@elysiajs/graphql-yoga",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "Plugin for Elysia for using graphql-yoga",
   "author": {
     "name": "saltyAom",
