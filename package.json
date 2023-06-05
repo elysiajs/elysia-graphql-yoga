@@ -1,6 +1,6 @@
 {
   "name": "@elysiajs/graphql-yoga",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "description": "Plugin for Elysia for using graphql-yoga",
   "author": {
     "name": "saltyAom",
@@ -9,6 +9,7 @@
   },
   "main": "./dist/index.js",
   "exports": {
+    "bun": "./dist/index.js",
     "node": "./dist/cjs/index.js",
     "require": "./dist/cjs/index.js",
     "import": "./dist/index.js",
