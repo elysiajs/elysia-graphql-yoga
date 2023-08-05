@@ -1,3 +1,6 @@
+# 0.5.5 - 5 Aug 2023
+- Add Mobius
+
 # 0.5.2 - 30 May 2023
 - Update plugin JSDoc
 

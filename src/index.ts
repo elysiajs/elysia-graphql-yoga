@@ -1,19 +1,53 @@
-import { t, type Elysia } from 'elysia'
+import { type Elysia } from 'elysia'
+import type { CreateMobius, Resolver } from 'graphql-mobius'
 
-import { createYoga, createSchema, type YogaServerOptions } from 'graphql-yoga'
+import {
+    createYoga,
+    createSchema,
+    type YogaServerOptions,
+    type YogaInitialContext
+} from 'graphql-yoga'
 import type { IExecutableSchemaDefinition } from '@graphql-tools/schema'
 
+type MaybePromise<T> = T | Promise<T>
+
 interface ElysiaYogaConfig<
-    ServerContext extends Record<string, any> = {},
-    UserContext extends Record<string, any> = {}
-> extends Omit<YogaServerOptions<ServerContext, UserContext>, 'schema'>,
-        IExecutableSchemaDefinition<UserContext> {
+    TypeDefs extends string,
+    Context extends
+        | undefined
+        | MaybePromise<Record<string, unknown>>
+        | ((initialContext: YogaInitialContext) => MaybePromise<unknown>)
+> extends Omit<YogaServerOptions<{}, {}>, 'schema' | 'typeDefs' | 'context'>,
+        Omit<IExecutableSchemaDefinition<{}>, 'resolvers'> {
     /**
      * @default /graphql
      *
      * path for GraphQL handler
      */
     path?: string
+    /**
+     * TypeDefs
+     */
+    typeDefs: TypeDefs
+    context?: Context
+    /**
+     * If this field isn't presented, context type is null
+     * It must also contains params when used
+     * I don't know why please help
+     */
+    useContext?: (
+        _: Context extends (a: YogaInitialContext) => infer A
+            ? NonNullable<Awaited<A>>
+            : NonNullable<Awaited<Context>>
+    ) => void
+    resolvers: Resolver<
+        CreateMobius<TypeDefs>,
+        Context extends undefined
+            ? undefined
+            : Context extends (a: YogaInitialContext) => infer A
+            ? NonNullable<Awaited<A>>
+            : NonNullable<Awaited<Context>>
+    >
 }
 
 /**
@@ -43,7 +77,14 @@ interface ElysiaYogaConfig<
  * ```
  */
 export const yoga =
-    <Prefix extends string = '/graphql'>({
+    <
+        const TypeDefs extends string,
+        const Context extends
+            | undefined
+            | MaybePromise<Record<string, unknown>>
+            | ((initialContext: YogaInitialContext) => MaybePromise<unknown>),
+        const Prefix extends string = '/graphql'
+    >({
         path = '/graphql' as Prefix,
         typeDefs,
         resolvers,
@@ -52,13 +93,13 @@ export const yoga =
         updateResolversInPlace,
         schemaExtensions,
         ...config
-    }: ElysiaYogaConfig) =>
+    }: ElysiaYogaConfig<TypeDefs, Context>) =>
     (app: Elysia) => {
         const yoga = createYoga({
             ...config,
             schema: createSchema({
                 typeDefs,
-                resolvers,
+                resolvers: resolvers as any,
                 resolverValidationOptions,
                 inheritResolversFromInterfaces,
                 updateResolversInPlace,
@@ -66,11 +107,13 @@ export const yoga =
             })
         })
 
-        return app
+        const result = app
             .get(path, async ({ request }) => yoga.fetch(request))
             .post(path, async ({ request }) => yoga.fetch(request), {
                 type: 'none'
             })
+
+        return result
     }
 
 export default yoga

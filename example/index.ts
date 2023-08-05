@@ -1,4 +1,4 @@
-import { Elysia, SCHEMA } from 'elysia'
+import { Elysia } from 'elysia'
 
 import { useGraphQlJit } from '@envelop/graphql-jit'
 
@@ -14,13 +14,24 @@ const app = new Elysia()
                 }
 
                 type Query {
-                    hi: String
+                    hi(hi: String!): Book
                     books: [Book]
                 }
             `,
+            context() {
+                return {
+                    a: 'B'
+                }
+            },
+            useContext(a) {},
             resolvers: {
                 Query: {
-                    hi: () => 'Hi from Elysia',
+                    hi: (parent, args, context, info) => {
+                        return {
+                            title: 'Elysia',
+                            author: 'saltyAom'
+                        }
+                    },
                     books: () => [
                         {
                             title: 'Elysia',
