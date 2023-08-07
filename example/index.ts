@@ -3,6 +3,7 @@ import { Elysia } from 'elysia'
 import { useGraphQlJit } from '@envelop/graphql-jit'
 
 import { yoga } from '../src/index'
+import { YogaInitialContext } from 'graphql-yoga'
 
 const app = new Elysia()
     .use(
@@ -18,15 +19,17 @@ const app = new Elysia()
                     books: [Book]
                 }
             `,
-            context() {
+            async context(r) {
                 return {
-                    a: 'B'
+                    a: 'b'
                 }
             },
-            useContext(a) {},
+            useContext(_) {},
             resolvers: {
                 Query: {
-                    hi: (parent, args, context, info) => {
+                    hi: async (parent, args, context, info) => {
+                        context.request
+                        
                         return {
                             title: 'Elysia',
                             author: 'saltyAom'

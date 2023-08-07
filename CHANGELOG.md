@@ -1,3 +1,12 @@
+# 0.6.1 - 7 Aug 2023
+- Add Request to context
+
+# 0.6.0 - 6 Aug 2023
+- Add support for Elysia 0.6
+
+
+# 0.6.0-rc.0 - 6 Aug 2023
+- Add support for Elysia 0.6
 # 0.5.5 - 5 Aug 2023
 - Add Mobius
 

@@ -11,6 +11,10 @@ import type { IExecutableSchemaDefinition } from '@graphql-tools/schema'
 
 type MaybePromise<T> = T | Promise<T>
 
+type Prettify<T> = {
+    [K in keyof T]: T[K]
+} & {}
+
 interface ElysiaYogaConfig<
     TypeDefs extends string,
     Context extends
@@ -43,10 +47,10 @@ interface ElysiaYogaConfig<
     resolvers: Resolver<
         CreateMobius<TypeDefs>,
         Context extends undefined
-            ? undefined
+            ? { request: Request }
             : Context extends (a: YogaInitialContext) => infer A
-            ? NonNullable<Awaited<A>>
-            : NonNullable<Awaited<Context>>
+            ? Prettify<NonNullable<Awaited<A>> & { request: Request }>
+            : Prettify<NonNullable<Awaited<Context>> & { request: Request }>
     >
 }
 
@@ -79,7 +83,7 @@ interface ElysiaYogaConfig<
 export const yoga =
     <
         const TypeDefs extends string,
-        const Context extends
+        Context extends
             | undefined
             | MaybePromise<Record<string, unknown>>
             | ((initialContext: YogaInitialContext) => MaybePromise<unknown>),
