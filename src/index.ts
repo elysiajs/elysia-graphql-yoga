@@ -40,9 +40,7 @@ interface ElysiaYogaConfig<
      * I don't know why please help
      */
     useContext?: (
-        _: Context extends (a: YogaInitialContext) => infer A
-            ? NonNullable<Awaited<A>>
-            : NonNullable<Awaited<Context>>
+        _: this['context']
     ) => void
     resolvers: Resolver<
         CreateMobius<TypeDefs>,

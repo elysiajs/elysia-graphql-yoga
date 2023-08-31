@@ -1,6 +1,6 @@
 {
     "name": "@elysiajs/graphql-yoga",
-    "version": "0.6.1",
+    "version": "0.6.2",
     "description": "Plugin for Elysia for using graphql-yoga",
     "author": {
         "name": "saltyAom",
@@ -36,13 +36,11 @@
     },
     "dependencies": {
         "graphql": "^16.6.0",
-        "graphql-mobius": "^0.1.5",
+        "graphql-mobius": "^0.1.11",
         "graphql-yoga": "^3.9.1"
     },
     "peerDependencies": {
-        "elysia": ">= 0.5.12",
-        "graphql": ">= 16.6.0",
-        "graphql-yoga": ">= 3.0.0"
+        "elysia": ">= 0.6.0"
     },
     "devDependencies": {
         "@envelop/core": "^3.0.6",
@@ -50,7 +48,7 @@
         "@envelop/parser-cache": "^5.0.6",
         "@types/node": "^20.1.4",
         "bun-types": "^0.5.8",
-        "elysia": "0.6.0",
+        "elysia": "0.6.6",
         "eslint": "^8.40.0",
         "rimraf": "4.4.1",
         "typescript": "^5.0.4"

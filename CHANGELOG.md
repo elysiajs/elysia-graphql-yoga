@@ -1,9 +1,14 @@
+# 0.6.2 - 31 Aug 2023
+Bug fix:
+- Duplicate Mutation to Subscription
+
 # 0.6.1 - 7 Aug 2023
+Feature:
 - Add Request to context
 
 # 0.6.0 - 6 Aug 2023
+Improvement:
 - Add support for Elysia 0.6
-
 
 # 0.6.0-rc.0 - 6 Aug 2023
 - Add support for Elysia 0.6

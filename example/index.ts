@@ -19,7 +19,7 @@ const app = new Elysia()
                     books: [Book]
                 }
             `,
-            async context(r) {
+            context() {
                 return {
                     a: 'b'
                 }
