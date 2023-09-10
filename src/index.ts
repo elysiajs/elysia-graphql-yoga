@@ -8,6 +8,7 @@ import {
     type YogaInitialContext
 } from 'graphql-yoga'
 import type { IExecutableSchemaDefinition } from '@graphql-tools/schema'
+import type { TypeSource } from '@graphql-tools/utils'
 
 type MaybePromise<T> = T | Promise<T>
 
@@ -16,7 +17,7 @@ type Prettify<T> = {
 } & {}
 
 interface ElysiaYogaConfig<
-    TypeDefs extends string,
+    TypeDefs extends TypeSource,
     Context extends
         | undefined
         | MaybePromise<Record<string, unknown>>
@@ -39,11 +40,15 @@ interface ElysiaYogaConfig<
      * It must also contains params when used
      * I don't know why please help
      */
-    useContext?: (
-        _: this['context']
-    ) => void
+    useContext?: (_: this['context']) => void
     resolvers: Resolver<
-        CreateMobius<TypeDefs>,
+        TypeDefs extends string
+            ? CreateMobius<TypeDefs>
+            : {
+                  Query: Record<string, unknown>
+                  Mutation: Record<string, unknown>
+                  Subscription: Record<string, unknown>
+              },
         Context extends undefined
             ? { request: Request }
             : Context extends (a: YogaInitialContext) => infer A

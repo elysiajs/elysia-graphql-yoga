@@ -1,3 +1,7 @@
+# 0.6.3 - 10 Sep 2023
+Improvement:
+- Update schema to accept `TypeSource` instead of `string`
+
 # 0.6.2 - 31 Aug 2023
 Bug fix:
 - Duplicate Mutation to Subscription

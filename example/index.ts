@@ -1,7 +1,5 @@
 import { Elysia } from 'elysia'
 
-import { useGraphQlJit } from '@envelop/graphql-jit'
-
 import { yoga } from '../src/index'
 import { YogaInitialContext } from 'graphql-yoga'
 
