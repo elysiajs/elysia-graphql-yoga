@@ -22,7 +22,7 @@ interface ElysiaYogaConfig<
         | undefined
         | MaybePromise<Record<string, unknown>>
         | ((initialContext: YogaInitialContext) => MaybePromise<unknown>)
-> extends Omit<YogaServerOptions<{}, {}>, 'schema' | 'typeDefs' | 'context'>,
+> extends Omit<YogaServerOptions<{}, {}>, 'schema' | 'typeDefs' | 'context' | 'cors'>,
         Omit<IExecutableSchemaDefinition<{}>, 'resolvers'> {
     /**
      * @default /graphql
@@ -103,6 +103,7 @@ export const yoga =
     }: ElysiaYogaConfig<TypeDefs, Context>) =>
     (app: Elysia) => {
         const yoga = createYoga({
+            cors: false,
             ...config,
             schema: createSchema({
                 typeDefs,

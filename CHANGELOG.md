@@ -1,3 +1,12 @@
+# 0.7.1 - 21 Sep 2023
+- Disable CORS options by default to enabled by `@elysiajs/cors`
+
+# 0.7.0 - 20 Sep 2023
+- Add support for Elysia 0.7
+
+# 0.7.0-beta.0 - 18 Sep 2023
+- Add support for Elysia 0.7
+
 # 0.6.3 - 10 Sep 2023
 Improvement:
 - Update schema to accept `TypeSource` instead of `string`

@@ -1,4 +1,4 @@
-export const typeDefs = `
+export const typeDefs = /* GraphQL */ `
     type Query {
         authors: [Author!]!
         author(id: ID, name: String): Author!
@@ -20,7 +20,7 @@ export const typeDefs = `
         id: ID!
         name: String!
         author: Author!
-    }    
+    }
 `
 
 import { Elysia } from 'elysia'
