@@ -1,3 +1,8 @@
+
+# 0.8.0-rc.0 - 15 Dec 2023
+Change:
+- Add support for Elysia 0.8
+
 # 0.7.1 - 21 Sep 2023
 - Disable CORS options by default to enabled by `@elysiajs/cors`
 
