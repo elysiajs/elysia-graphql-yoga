@@ -22,7 +22,10 @@ interface ElysiaYogaConfig<
         | undefined
         | MaybePromise<Record<string, unknown>>
         | ((initialContext: YogaInitialContext) => MaybePromise<unknown>)
-> extends Omit<YogaServerOptions<{}, {}>, 'schema' | 'typeDefs' | 'context' | 'cors'>,
+> extends Omit<
+            YogaServerOptions<{}, {}>,
+            'schema' | 'typeDefs' | 'context' | 'cors'
+        >,
         Omit<IExecutableSchemaDefinition<{}>, 'resolvers'> {
     /**
      * @default /graphql
