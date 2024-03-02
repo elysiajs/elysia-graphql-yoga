@@ -85,6 +85,26 @@ interface ElysiaYogaConfig<
  *     )
  *     .listen(8080)
  * ```
+ * 
+ *  * @example
+ * ```typescript
+ * import { Elysia } from 'elysia'
+ * import { yoga, createSchema } from '@elysiajs/graphql-yoga'
+ * const { loadFiles } = require('@graphql-tools/load-files')
+ * 
+ * const schema = createSchema({
+ *  typeDefs: await loadFiles('src/typeDefs/*.graphql')
+ *  resolvers: await loadFiles('src/resolvers/*.{js,ts}')
+ * })
+ *
+ * const app = new Elysia()
+ *     .use(
+ *         yoga({
+ *             schema
+ *         })
+ *     )
+ *     .listen(8080)
+ * ```
  */
 export const yoga =
     <
@@ -102,13 +122,14 @@ export const yoga =
         inheritResolversFromInterfaces,
         updateResolversInPlace,
         schemaExtensions,
+        schema,
         ...config
     }: ElysiaYogaConfig<TypeDefs, Context>) =>
     (app: Elysia) => {
         const yoga = createYoga({
             cors: false,
             ...config,
-            schema: createSchema({
+            schema: schema || createSchema({
                 typeDefs,
                 resolvers: resolvers as any,
                 resolverValidationOptions,
