@@ -4,6 +4,7 @@ import type { CreateMobius, Resolver } from 'graphql-mobius'
 import {
     createYoga,
     createSchema,
+    type GraphQLSchemaWithContext,
     type YogaServerOptions,
     type YogaInitialContext
 } from 'graphql-yoga'
@@ -24,7 +25,7 @@ interface ElysiaYogaConfig<
         | ((initialContext: YogaInitialContext) => MaybePromise<unknown>)
 > extends Omit<
             YogaServerOptions<{}, {}>,
-            'schema' | 'typeDefs' | 'context' | 'cors'
+            'typeDefs' | 'context' | 'cors'
         >,
         Omit<IExecutableSchemaDefinition<{}>, 'resolvers'> {
     /**
@@ -38,6 +39,7 @@ interface ElysiaYogaConfig<
      */
     typeDefs: TypeDefs
     context?: Context
+    schema?: GraphQLSchemaWithContext<Context>
     /**
      * If this field isn't presented, context type is null
      * It must also contains params when used
