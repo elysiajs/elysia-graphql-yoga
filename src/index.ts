@@ -108,25 +108,24 @@ interface ElysiaYogaConfig<
  *     .listen(8080)
  * ```
  */
-export const yoga =
-    <
-        const TypeDefs extends string,
-        Context extends
-            | undefined
-            | MaybePromise<Record<string, unknown>>
-            | ((initialContext: YogaInitialContext) => MaybePromise<unknown>),
-        const Prefix extends string = '/graphql'
-    >({
-        path = '/graphql' as Prefix,
-        typeDefs,
-        resolvers,
-        resolverValidationOptions,
-        inheritResolversFromInterfaces,
-        updateResolversInPlace,
-        schemaExtensions,
-        schema,
-        ...config
-    }: ElysiaYogaConfig<TypeDefs, Context>) =>
+export const yoga = <
+    TypeDefs extends string,
+    Context extends
+        | undefined
+        | MaybePromise<Record<string, unknown>>
+        | ((initialContext: YogaInitialContext) => MaybePromise<unknown>),
+    Prefix extends string = '/graphql'
+>({
+    path = '/graphql' as Prefix,
+    typeDefs,
+    resolvers,
+    resolverValidationOptions,
+    inheritResolversFromInterfaces,
+    updateResolversInPlace,
+    schemaExtensions,
+    schema,
+    ...config
+}: ElysiaYogaConfig<TypeDefs, Context>) =>
     (app: Elysia) => {
         const yoga = createYoga({
             cors: false,
