@@ -88,7 +88,7 @@ interface ElysiaYogaConfig<
  */
 export const yoga =
     <
-        const TypeDefs extends string,
+        const TypeDefs extends string | TypeSource,
         Context extends
             | undefined
             | MaybePromise<Record<string, unknown>>
