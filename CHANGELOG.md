@@ -1,3 +1,6 @@
+# 1.0.3 - 2 May 2024
+Feature:
+- [#8](https://github.com/elysiajs/elysia-graphql-yoga/pull/8) adds schema as prop that can passed to yoga
 
 # 1.0.2 - 18 Mar 2024
 Change:
