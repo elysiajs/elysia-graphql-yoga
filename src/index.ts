@@ -192,13 +192,11 @@ export const yoga =
 				})
 		})
 
-		const result = app
-			.get(path, async ({ request }) => yoga.fetch(request))
-			.post(path, async ({ request }) => yoga.fetch(request), {
+		return app
+			.get(path as Prefix, async ({ request }) => yoga.fetch(request))
+			.post(path as Prefix, async ({ request }) => yoga.fetch(request), {
 				type: 'none'
 			})
-
-		return result
 	}
 
 export default yoga
