@@ -39,7 +39,7 @@
     "dependencies": {
         "graphql": "^16.6.0",
         "graphql-mobius": "^0.1.11",
-        "graphql-yoga": "^3.9.1"
+        "graphql-yoga": "^5.7.0"
     },
     "devDependencies": {
         "@envelop/core": "^3.0.6",
