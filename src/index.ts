@@ -92,12 +92,12 @@ interface ElysiaYogaConfigWithTypeDefsAndResolvers<
 					Query: Record<string, unknown>
 					Mutation: Record<string, unknown>
 					Subscription: Record<string, unknown>
-			  },
+				},
 		Context extends undefined
 			? { request: Request }
 			: Context extends (a: YogaInitialContext) => infer A
-			? Prettify<NonNullable<Awaited<A>> & { request: Request }>
-			: Prettify<NonNullable<Awaited<Context>> & { request: Request }>
+				? Prettify<NonNullable<Awaited<A>> & { request: Request }>
+				: Prettify<NonNullable<Awaited<Context>> & { request: Request }>
 	>
 }
 
@@ -195,7 +195,7 @@ export const yoga =
 		return app
 			.get(path as Prefix, async ({ request }) => yoga.fetch(request))
 			.post(path as Prefix, async ({ request }) => yoga.fetch(request), {
-				type: 'none'
+				parse: 'none'
 			})
 	}
 
