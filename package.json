@@ -37,7 +37,6 @@
         "release": "npm run build && npm run test && npm publish --access public"
     },
     "dependencies": {
-        "graphql": "^16.6.0",
         "graphql-mobius": "^0.1.11",
         "graphql-yoga": "^3.9.1"
     },
@@ -48,18 +47,12 @@
         "@types/bun": "1.1.14",
         "elysia": "1.4.0",
         "eslint": "9.6.0",
+        "graphql": "^16.6.0",
         "tsup": "^8.1.0",
         "typescript": "^5.5.3"
     },
     "peerDependencies": {
-        "elysia": ">= 1.4.0"
-    },
-    "peerDependenciesMeta": {
-        "graphql": {
-            "optional": true
-        },
-        "graphql-yoga": {
-            "optional": true
-        }
+        "elysia": ">= 1.4.0",
+        "graphql": "^16.6.0"
     }
 }
