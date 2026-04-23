@@ -1,7 +1,7 @@
 {
-    "name": "@elysiajs/graphql-yoga",
-    "version": "1.4.0",
-    "description": "Plugin for Elysia for using graphql-yoga",
+    "name": "@elysia/graphql-yoga",
+    "version": "1.4.1",
+    "description": "Elysia plugin to integrate GraphQL Yoga",
     "author": {
         "name": "saltyAom",
         "url": "https://github.com/SaltyAom",
