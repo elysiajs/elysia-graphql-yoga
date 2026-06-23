@@ -1,6 +1,7 @@
 {
     "type": "module",
     "dependencies": {
-        "@elysiajs/graphql-yoga": "../../.."
+        "@elysiajs/graphql-yoga": "../../..",
+        "graphql": "^16.13.1"
     }
 }
