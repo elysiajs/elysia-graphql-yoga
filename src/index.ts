@@ -194,9 +194,13 @@ export const yoga =
 
 		return app
 			.get(path as Prefix, async ({ request }) => yoga.fetch(request))
-			.post(path as Prefix, async ({ request }) => yoga.fetch(request), {
-				parse: 'none'
-			})
+			.post(
+				path as Prefix,
+				{
+					parse: 'none'
+				},
+				async ({ request }) => yoga.fetch(request)
+			)
 	}
 
 export default yoga

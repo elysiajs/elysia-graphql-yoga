@@ -27,7 +27,7 @@ const app = new Elysia()
                 Query: {
                     hi: async (parent, args, context, info) => {
                         context.request
-                        
+
                         return {
                             title: 'Elysia',
                             author: 'saltyAom'
@@ -44,4 +44,4 @@ const app = new Elysia()
         })
     )
     .get('/', () => 'Hi')
-    .listen(8080)
+    .listen(3000)
